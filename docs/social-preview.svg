@@ -1,139 +1,90 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#2563eb;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.15" />
-      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
     </linearGradient>
     <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-opacity="0.3"/>
     </filter>
   </defs>
-  
+
   <!-- Background -->
-  <rect width="1280" height="640" fill="url(#bgGradient)"/>
-  
-  <!-- Decorative circles -->
-  <circle cx="100" cy="100" r="150" fill="white" opacity="0.03"/>
-  <circle cx="1180" cy="540" r="200" fill="white" opacity="0.03"/>
-  
-  <!-- Main Content Container -->
-  <g transform="translate(80, 120)">
-    
-    <!-- Left Side - Text Content -->
-    <g>
-      <!-- Icon -->
-      <circle cx="50" cy="50" r="45" fill="white" opacity="0.2"/>
-      <text x="50" y="70" font-size="50" text-anchor="middle" fill="white">⏰</text>
-      
-      <!-- Title -->
-      <text x="0" y="170" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">
-        Orari Lavoro PA
-      </text>
-      
-      <!-- Subtitle -->
-      <text x="0" y="230" font-family="Arial, sans-serif" font-size="32" fill="white" opacity="0.9">
-        Tracciamento ore per dipendenti pubblici italiani
-      </text>
-      
-      <!-- Features -->
-      <g transform="translate(0, 280)">
-        <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" fill="white" opacity="0.85">
-          ✅ 36 ore/settimana automatiche
-        </text>
-        <text x="0" y="40" font-family="Arial, sans-serif" font-size="24" fill="white" opacity="0.85">
-          🏠 Supporto Smart Working
-        </text>
-        <text x="0" y="80" font-family="Arial, sans-serif" font-size="24" fill="white" opacity="0.85">
-          🔒 Dati solo sul tuo dispositivo
-        </text>
-        <text x="0" y="120" font-family="Arial, sans-serif" font-size="24" fill="white" opacity="0.85">
-          📴 Funziona offline (PWA)
-        </text>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <!-- Left Content (Text) -->
+  <g transform="translate(80, 150)">
+    <!-- Logo Icon -->
+    <rect x="0" y="-80" width="80" height="80" rx="20" fill="white"/>
+    <text x="40" y="-28" font-size="50" text-anchor="middle">🕐</text>
+
+    <!-- Main Title -->
+    <text x="0" y="60" font-family="'Segoe UI', Roboto, sans-serif" font-size="80" font-weight="800" fill="white">
+      Orari Lavoro PA
+    </text>
+
+    <!-- Tagline -->
+    <text x="0" y="130" font-family="'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="400" fill="#bfdbfe">
+      La PWA semplice per dipendenti pubblici.
+    </text>
+
+    <!-- Feature List -->
+    <g transform="translate(0, 200)">
+      <g transform="translate(0,0)">
+        <circle cx="20" cy="20" r="20" fill="#4ade80"/>
+        <text x="20" y="27" text-anchor="middle" fill="#064e3b" font-weight="bold" font-size="20">✓</text>
+        <text x="60" y="30" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="600">Privacy First (Locale)</text>
+      </g>
+      <g transform="translate(0,70)">
+        <circle cx="20" cy="20" r="20" fill="#4ade80"/>
+        <text x="20" y="27" text-anchor="middle" fill="#064e3b" font-weight="bold" font-size="20">✓</text>
+        <text x="60" y="30" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="600">Calcolo Saldo Ore</text>
+      </g>
+      <g transform="translate(0,140)">
+        <circle cx="20" cy="20" r="20" fill="#4ade80"/>
+        <text x="20" y="27" text-anchor="middle" fill="#064e3b" font-weight="bold" font-size="20">✓</text>
+        <text x="60" y="30" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="600">Funziona Offline</text>
       </g>
     </g>
     
-    <!-- Right Side - App Preview Mockup -->
-    <g transform="translate(700, 0)">
-      <!-- Phone mockup -->
-      <rect x="0" y="0" width="420" height="500" rx="30" fill="url(#cardGradient)" filter="url(#shadow)" stroke="white" stroke-width="2" opacity="0.3"/>
-      <rect x="15" y="15" width="390" height="470" rx="20" fill="white"/>
-      
-      <!-- App header -->
-      <rect x="15" y="15" width="390" height="60" rx="20" fill="#2563eb"/>
-      <text x="210" y="55" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
-        🕐 Orari Lavoro
-      </text>
-      
-      <!-- Week indicator -->
-      <rect x="35" y="95" width="350" height="50" rx="8" fill="#f3f4f6"/>
-      <text x="210" y="125" font-family="Arial, sans-serif" font-size="16" fill="#1f2937" text-anchor="middle">
-        Settimana 6 • 2026
-      </text>
-      
-      <!-- Day cards -->
-      <g transform="translate(35, 165)">
-        <rect x="0" y="0" width="65" height="70" rx="6" fill="#f3f4f6"/>
-        <text x="32" y="20" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">LUN</text>
-        <text x="32" y="40" font-family="Arial, sans-serif" font-size="12" fill="#10b981" text-anchor="middle">08:00</text>
-        <text x="32" y="55" font-family="Arial, sans-serif" font-size="12" fill="#ef4444" text-anchor="middle">17:00</text>
-        
-        <rect x="75" y="0" width="65" height="70" rx="6" fill="#f3f4f6"/>
-        <text x="107" y="20" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">MAR</text>
-        <text x="107" y="40" font-family="Arial, sans-serif" font-size="12" fill="#10b981" text-anchor="middle">08:30</text>
-        <text x="107" y="55" font-family="Arial, sans-serif" font-size="12" fill="#ef4444" text-anchor="middle">16:30</text>
-        
-        <rect x="150" y="0" width="65" height="70" rx="6" fill="#8b5cf6"/>
-        <text x="182" y="20" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">MER</text>
-        <text x="182" y="45" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">🏠</text>
-        <text x="182" y="65" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Smart</text>
-        
-        <rect x="225" y="0" width="65" height="70" rx="6" fill="#f3f4f6"/>
-        <text x="257" y="20" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">GIO</text>
-        <text x="257" y="40" font-family="Arial, sans-serif" font-size="12" fill="#10b981" text-anchor="middle">09:00</text>
-        <text x="257" y="55" font-family="Arial, sans-serif" font-size="12" fill="#ef4444" text-anchor="middle">18:00</text>
-        
-        <rect x="300" y="0" width="50" height="70" rx="6" fill="#f3f4f6"/>
-        <text x="325" y="20" font-family="Arial, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle">VEN</text>
-        <text x="325" y="50" font-family="Arial, sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">6h</text>
-      </g>
-      
-      <!-- Summary -->
-      <rect x="35" y="255" width="350" height="60" rx="8" fill="#10b981" opacity="0.1"/>
-      <text x="60" y="285" font-family="Arial, sans-serif" font-size="14" fill="#1f2937" font-weight="600">
-        Totale: 37h 30m
-      </text>
-      <text x="60" y="305" font-family="Arial, sans-serif" font-size="14" fill="#10b981" font-weight="bold">
-        Saldo: +1h 30m ✅
-      </text>
-      
-      <!-- Action buttons -->
-      <rect x="35" y="335" width="160" height="40" rx="8" fill="#10b981"/>
-      <text x="115" y="360" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">
-        🟢 Entrata
-      </text>
-      
-      <rect x="205" y="335" width="180" height="40" rx="8" fill="#ef4444"/>
-      <text x="295" y="360" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">
-        🔴 Uscita
-      </text>
-      
-      <!-- Bottom badge -->
-      <rect x="115" y="395" width="190" height="30" rx="15" fill="#2563eb" opacity="0.2"/>
-      <text x="210" y="415" font-family="Arial, sans-serif" font-size="12" fill="#2563eb" text-anchor="middle" font-weight="600">
-        📱 PWA • Offline Ready
-      </text>
-    </g>
-    
+    <!-- CTA Button Badge -->
+    <rect x="0" y="380" width="220" height="60" rx="30" fill="white"/>
+    <text x="110" y="422" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2563eb">GRATIS</text>
   </g>
-  
-  <!-- Bottom bar -->
-  <rect y="600" width="1280" height="40" fill="black" opacity="0.2"/>
-  <text x="640" y="625" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle" opacity="0.8">
-    🇮🇹 100% Gratuita • Open Source • Privacy First • github.com/VTvito/italian-pa-employee-attendance
-  </text>
+
+  <!-- Right Content (Mockup) - Tilted -->
+  <g transform="translate(800, 320) rotate(-10)">
+    <!-- Phone Body -->
+    <rect x="-180" y="-280" width="360" height="640" rx="40" fill="#111827" filter="url(#shadow)"/>
+    <!-- Screen -->
+    <rect x="-165" y="-265" width="330" height="610" rx="30" fill="#f3f4f6"/>
+    
+    <!-- App Header in Mockup -->
+    <rect x="-165" y="-265" width="330" height="80" rx="0" fill="#2563eb"/>
+    <path d="M -165 -235 v -30 a 30 30 0 0 1 30 -30 h 270 a 30 30 0 0 1 30 30 v 30 z" fill="#2563eb"/>
+    <text x="0" y="-215" text-anchor="middle" fill="white" font-family="sans-serif" font-weight="bold" font-size="20">Riepilogo</text>
+
+    <!-- Card 1 -->
+    <rect x="-145" y="-160" width="290" height="100" rx="15" fill="white" filter="url(#shadow)"/>
+    <text x="-125" y="-130" font-family="sans-serif" font-size="14" fill="#6b7280">Totale Ore</text>
+    <text x="-125" y="-90" font-family="sans-serif" font-size="36" font-weight="bold" fill="#1f2937">37:30</text>
+    
+    <!-- Card 2 -->
+    <rect x="-145" y="-40" width="290" height="100" rx="15" fill="white" filter="url(#shadow)"/>
+    <text x="-125" y="-10" font-family="sans-serif" font-size="14" fill="#6b7280">Saldo</text>
+    <text x="-125" y="30" font-family="sans-serif" font-size="36" font-weight="bold" fill="#10b981">+1h 30m</text>
+
+    <!-- Actions -->
+    <rect x="-145" y="80" width="135" height="100" rx="15" fill="#10b981"/>
+    <text x="-77" y="140" text-anchor="middle" font-size="30">🟢</text>
+    
+    <rect x="10" y="80" width="135" height="100" rx="15" fill="#ef4444"/>
+    <text x="77" y="140" text-anchor="middle" font-size="30">🔴</text>
+
+    <!-- Smart Working Button -->
+     <rect x="-145" y="200" width="290" height="60" rx="15" fill="#8b5cf6"/>
+     <text x="0" y="240" text-anchor="middle" font-family="sans-serif" font-weight="bold" fill="white">SMART WORKING</text>
+
+  </g>
+
 </svg>
