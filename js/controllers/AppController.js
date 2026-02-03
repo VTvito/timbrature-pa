@@ -474,7 +474,13 @@ export class AppController {
         } else if (result.type === 'assente') {
             entry = TimeEntry.createAssente();
         } else {
-            entry = new TimeEntry(result.type, result.time);
+            if (result.type === 'entrata') {
+                entry = TimeEntry.createEntrata(result.time);
+            } else if (result.type === 'uscita') {
+                entry = TimeEntry.createUscita(result.time);
+            } else {
+                entry = new TimeEntry({ type: result.type, time: result.time });
+            }
         }
 
         // Se è un tipo speciale, verifica e pulisci il giorno

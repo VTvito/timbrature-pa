@@ -136,9 +136,24 @@ function showUpdateNotification() {
     document.body.prepend(banner);
     
     // Gestisci click su aggiorna
-    document.getElementById('update-btn').addEventListener('click', () => {
-        // Ricarica la pagina per applicare l'aggiornamento
-        window.location.reload();
+    document.getElementById('update-btn').addEventListener('click', async () => {
+        try {
+            const registration = await navigator.serviceWorker.getRegistration();
+            if (registration?.waiting) {
+                // Chiedi al SW in attesa di attivarsi
+                registration.waiting.postMessage({ action: 'skipWaiting' });
+
+                // Ricarica quando il nuovo SW prende il controllo
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    window.location.reload();
+                }, { once: true });
+            } else {
+                // Fallback: ricarica subito
+                window.location.reload();
+            }
+        } catch (e) {
+            window.location.reload();
+        }
     });
 }
 

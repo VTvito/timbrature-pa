@@ -47,6 +47,7 @@
 - **Installa come app nativa** su smartphone e desktop
 - **Funziona senza internet** - perfetto in ufficio senza WiFi
 - **Si aggiorna automaticamente** quando torni online
+- **Aggiornamenti PWA**: se compare il banner, tocca "Aggiorna ora" per applicare la nuova versione
 
 ### 📤 Export Dati
 - **JSON**: backup completo importabile
