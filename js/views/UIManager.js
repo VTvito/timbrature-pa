@@ -490,7 +490,16 @@ export class UIManager {
         item.setAttribute('tabindex', '0');
         item.setAttribute('aria-label', `Modifica ${entry.type}`);
 
-        const displayValue = entry.time || `${entry.hours}h`;
+        // Gestisci correttamente il display value
+        let displayValue;
+        if (entry.time) {
+            displayValue = entry.time;
+        } else if (entry.hours !== undefined && entry.hours !== null) {
+            displayValue = `${entry.hours}h`;
+        } else {
+            // Fallback per entry incomplete (es. entrata senza orario)
+            displayValue = '--:--';
+        }
         const typeLabel = this.getTypeLabel(entry.type);
         const typeClass = `type-${entry.type}`;
 

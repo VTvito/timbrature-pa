@@ -53,19 +53,71 @@ async function registerServiceWorker() {
                     if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                         // Nuova versione disponibile
                         console.log('Nuova versione dell\'app disponibile');
-                        eventBus.emit(EVENTS.TOAST_SHOW, {
-                            message: 'Nuova versione disponibile! Ricarica la pagina.',
-                            type: 'info'
-                        });
+                        showUpdateNotification();
                     }
                 });
             });
+            
+            // Controlla se c'è già un worker in attesa
+            if (registration.waiting) {
+                showUpdateNotification();
+            }
 
         } catch (error) {
             console.warn('Service Worker non registrato:', error.message);
             // Non bloccare l'app se il SW fallisce
         }
     }
+}
+
+/**
+ * Mostra notifica di aggiornamento disponibile
+ */
+function showUpdateNotification() {
+    // Crea un banner di aggiornamento in alto nella pagina
+    const existingBanner = document.getElementById('update-banner');
+    if (existingBanner) return; // Già mostrato
+    
+    const banner = document.createElement('div');
+    banner.id = 'update-banner';
+    banner.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, #059669, #10b981);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            font-family: inherit;
+        ">
+            <span>🎉 <strong>Nuova versione disponibile!</strong></span>
+            <button id="update-btn" style="
+                background: white;
+                color: #059669;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+            ">
+                Aggiorna ora
+            </button>
+        </div>
+    `;
+    
+    document.body.prepend(banner);
+    
+    // Gestisci click su aggiorna
+    document.getElementById('update-btn').addEventListener('click', () => {
+        // Ricarica la pagina per applicare l'aggiornamento
+        window.location.reload();
+    });
 }
 
 // Debug: mostra base URL

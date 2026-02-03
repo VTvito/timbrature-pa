@@ -182,8 +182,9 @@ export class TimeEntry {
             type: this.type
         };
 
-        if (this.time) {
-            json.time = this.time;
+        // Includi sempre time per entry che lo richiedono (anche se null)
+        if (requiresTime(this.type)) {
+            json.time = this.time || null;
         }
 
         if (this.hours !== null) {

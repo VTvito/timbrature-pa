@@ -85,7 +85,7 @@ export class ExportService {
                 // Prima entry con ore calcolate
                 const firstEntry = entries[0];
                 const firstType = this.getTypeLabel(firstEntry.type);
-                const firstValue = firstEntry.time || `${firstEntry.hours}h`;
+                const firstValue = firstEntry.time || (firstEntry.hours !== undefined ? `${firstEntry.hours}h` : '--:--');
                 
                 if (entries.length === 1) {
                     lines.push(`${dateStr},${dayName},${firstType},${firstValue},${dayHours.formatted}`);
@@ -96,7 +96,7 @@ export class ExportService {
                     for (let i = 1; i < entries.length; i++) {
                         const entry = entries[i];
                         const type = this.getTypeLabel(entry.type);
-                        const value = entry.time || `${entry.hours}h`;
+                        const value = entry.time || (entry.hours !== undefined ? `${entry.hours}h` : '--:--');
                         
                         // Ultima entry ha le ore calcolate
                         const hours = i === entries.length - 1 ? dayHours.formatted : '';
@@ -264,7 +264,7 @@ export class ExportService {
                 lines.push('  - Nessuna registrazione');
             } else {
                 for (const entry of entries) {
-                    const value = entry.time || `${entry.hours}h`;
+                    const value = entry.time || (entry.hours !== undefined ? `${entry.hours}h` : '--:--');
                     lines.push(`  ${this.getTypeLabel(entry.type)}: ${value}`);
                 }
                 lines.push(`  → Ore: ${dayHours.formatted}`);
