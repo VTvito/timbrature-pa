@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="App per tracciare orari di ingresso e uscita dal lavoro">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>🕐 Orari Lavoro</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" sizes="192x192" href="icons/icon-192.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Install Banner PWA (per nuovi visitatori) -->
+    <div id="installBanner" class="install-banner" style="display: none;">
+        <div class="install-banner-content">
+            <div class="install-banner-icon">📲</div>
+            <div class="install-banner-text">
+                <strong>Installa Orari Lavoro</strong>
+                <span>Usa l'app offline, sempre a portata di mano!</span>
+            </div>
+            <button id="installBannerBtn" class="btn btn-install-banner">Installa</button>
+            <button id="installBannerClose" class="btn btn-install-close" aria-label="Chiudi">✕</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>🕐 Orari Lavoro</h1>
+            <button id="installBtn" class="btn btn-install" style="display: none;">
+                📲 Installa App
+            </button>
+        </header>
+
+        <!-- Week Navigation -->
+        <nav class="week-navigation">
+            <button id="prevWeekBtn" class="btn btn-nav" aria-label="Settimana precedente">
+                ◀ Sett. Prec.
+            </button>
+            <div class="week-indicator">
+                <span id="weekLabel" class="week-label">Settimana 5</span>
+                <span id="yearLabel" class="year-label">2026</span>
+                <span id="currentWeekBadge" class="badge badge-current" style="display: none;">Corrente</span>
+            </div>
+            <button id="nextWeekBtn" class="btn btn-nav" aria-label="Settimana successiva">
+                Sett. Succ. ▶
+            </button>
+        </nav>
+
+        <!-- Action Buttons -->
+        <section class="action-buttons">
+            <button id="entrataBtn" class="btn btn-action btn-entrata">
+                🟢 Entrata
+            </button>
+            <button id="uscitaBtn" class="btn btn-action btn-uscita">
+                🔴 Uscita
+            </button>
+            <button id="smartBtn" class="btn btn-action btn-smart">
+                🏠 Smart
+            </button>
+            <button id="assenteBtn" class="btn btn-action btn-assente">
+                ❌ Assente
+            </button>
+        </section>
+
+        <!-- Week Days List -->
+        <main class="week-days" id="weekDays">
+            <!-- Days will be rendered here dynamically -->
+        </main>
+
+        <!-- Week Summary -->
+        <section class="week-summary" id="weekSummary">
+            <div class="summary-row">
+                <span class="summary-label">Totale Settimana:</span>
+                <span id="totalHours" class="summary-value">00:00</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Ore Richieste:</span>
+                <span class="summary-value">36:00</span>
+            </div>
+            <div class="summary-row summary-balance">
+                <span class="summary-label">Saldo:</span>
+                <span id="balanceHours" class="summary-value balance-neutral">+00:00</span>
+            </div>
+        </section>
+
+        <!-- Export/Import Buttons -->
+        <section class="export-buttons">
+            <button id="exportJsonBtn" class="btn btn-export">
+                📄 Esporta JSON
+            </button>
+            <button id="exportExcelBtn" class="btn btn-export">
+                📊 Esporta Excel
+            </button>
+            <button id="importBtn" class="btn btn-export">
+                📥 Importa
+            </button>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+            <button id="backupBtn" class="btn btn-export">
+                💾 Backup
+            </button>
+        </section>
+
+        <!-- Backup Status -->
+        <footer class="backup-status" id="backupStatus">
+            <span class="status-icon">✅</span>
+            <span id="backupText">Ultimo backup: mai</span>
+        </footer>
+    </div>
+
+    <!-- Modal Edit Entry -->
+    <div id="editModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="editModalTitle">Modifica Registrazione</h2>
+                <button class="modal-close" data-action="close" aria-label="Chiudi">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <div class="form-group">
+                        <label for="editDate">Data</label>
+                        <input type="date" id="editDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editType">Tipo</label>
+                        <select id="editType" required>
+                            <option value="entrata">Entrata</option>
+                            <option value="uscita">Uscita</option>
+                            <option value="smart">Smart Working</option>
+                            <option value="assente">Assente</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="timeGroup">
+                        <label for="editTime">Orario</label>
+                        <input type="time" id="editTime" required>
+                    </div>
+                    <input type="hidden" id="editIndex">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-action="delete">🗑️ Elimina</button>
+                <button class="btn btn-secondary" data-action="close">Annulla</button>
+                <button class="btn btn-primary" data-action="save">💾 Salva</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirm -->
+    <div id="confirmModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2 id="confirmModalTitle">Conferma</h2>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Sei sicuro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="cancel">Annulla</button>
+                <button class="btn btn-danger" data-action="confirm">Conferma</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Backup Reminder -->
+    <div id="backupReminderModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="backupReminderTitle">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h2 id="backupReminderTitle">⚠️ Reminder Backup</h2>
+            </div>
+            <div class="modal-body">
+                <p id="backupReminderMessage">Sono passate più di 24 ore dall'ultimo backup. Vuoi effettuare un backup ora?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="later">Più tardi</button>
+                <button class="btn btn-primary" data-action="backup">💾 Backup Ora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Clean Data -->
+    <div id="cleanDataModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="cleanDataTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="cleanDataTitle">🧹 Pulizia Dati Vecchi</h2>
+            </div>
+            <div class="modal-body">
+                <p>Sono stati trovati dati più vecchi di 3 mesi:</p>
+                <ul id="oldWeeksList" class="old-weeks-list"></ul>
+                <p class="warning-text">⚠️ Verrà creato un backup prima della pulizia.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-action="cancel">Annulla</button>
+                <button class="btn btn-warning" data-action="clean">Backup e Pulisci</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+    <!-- Scripts (ES6 Modules) -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

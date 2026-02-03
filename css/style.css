@@ -1,0 +1,971 @@
+/* ============================================
+   CSS Variables - Design Tokens
+   ============================================ */
+:root {
+    /* Colors */
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-primary-light: #3b82f6;
+    
+    --color-success: #10b981;
+    --color-success-dark: #059669;
+    --color-success-light: #34d399;
+    
+    --color-warning: #f59e0b;
+    --color-warning-dark: #d97706;
+    --color-warning-light: #fbbf24;
+    
+    --color-danger: #ef4444;
+    --color-danger-dark: #dc2626;
+    --color-danger-light: #f87171;
+    
+    --color-smart: #8b5cf6;
+    --color-smart-dark: #7c3aed;
+    
+    --color-assente: #6b7280;
+    --color-assente-dark: #4b5563;
+    
+    /* Neutrals */
+    --color-bg: #f3f4f6;
+    --color-bg-card: #ffffff;
+    --color-bg-dark: #e5e7eb;
+    --color-text: #1f2937;
+    --color-text-light: #6b7280;
+    --color-text-muted: #9ca3af;
+    --color-border: #d1d5db;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-full: 9999px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   App Container
+   ============================================ */
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom));
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.app-header h1 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Button Variants */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text);
+}
+.btn-secondary:hover:not(:disabled) {
+    background-color: var(--color-border);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: white;
+}
+.btn-danger:hover:not(:disabled) {
+    background-color: var(--color-danger-dark);
+}
+
+.btn-warning {
+    background-color: var(--color-warning);
+    color: white;
+}
+.btn-warning:hover:not(:disabled) {
+    background-color: var(--color-warning-dark);
+}
+
+.btn-install {
+    background-color: var(--color-success);
+    color: white;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+.btn-install:hover:not(:disabled) {
+    background-color: var(--color-success-dark);
+}
+
+/* Navigation Buttons */
+.btn-nav {
+    background-color: var(--color-bg-card);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+}
+.btn-nav:hover:not(:disabled) {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* Action Buttons */
+.btn-action {
+    flex: 1;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-entrata {
+    background-color: var(--color-success);
+    color: white;
+}
+.btn-entrata:hover:not(:disabled) {
+    background-color: var(--color-success-dark);
+}
+
+.btn-uscita {
+    background-color: var(--color-danger);
+    color: white;
+}
+.btn-uscita:hover:not(:disabled) {
+    background-color: var(--color-danger-dark);
+}
+
+.btn-smart {
+    background-color: var(--color-smart);
+    color: white;
+}
+.btn-smart:hover:not(:disabled) {
+    background-color: var(--color-smart-dark);
+}
+
+.btn-assente {
+    background-color: var(--color-assente);
+    color: white;
+}
+.btn-assente:hover:not(:disabled) {
+    background-color: var(--color-assente-dark);
+}
+
+/* Export Buttons */
+.btn-export {
+    background-color: var(--color-bg-card);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+}
+.btn-export:hover:not(:disabled) {
+    background-color: var(--color-bg-dark);
+    border-color: var(--color-text-light);
+}
+
+/* ============================================
+   Week Navigation
+   ============================================ */
+.week-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.week-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.week-label {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.year-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+}
+
+.badge-current {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* ============================================
+   Action Buttons Section
+   ============================================ */
+.action-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================
+   Week Days List
+   ============================================ */
+.week-days {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.day-card {
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition-fast);
+}
+
+.day-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.day-card.is-today {
+    border: 2px solid var(--color-primary);
+}
+
+.day-card.is-weekend {
+    background-color: var(--color-bg);
+    opacity: 0.7;
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-dark);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.day-name {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.day-date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.day-hours {
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.day-entries {
+    padding: var(--spacing-sm);
+}
+
+.day-entries.empty {
+    padding: var(--spacing-md);
+    text-align: center;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+/* Entry Item */
+.entry-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.entry-item:hover {
+    background-color: var(--color-bg);
+}
+
+.entry-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.entry-time {
+    font-weight: 600;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    min-width: 50px;
+}
+
+.entry-type {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+.entry-type.type-entrata {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--color-success-dark);
+}
+
+.entry-type.type-uscita {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--color-danger-dark);
+}
+
+.entry-type.type-smart {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: var(--color-smart-dark);
+}
+
+.entry-type.type-assente {
+    background-color: rgba(107, 114, 128, 0.15);
+    color: var(--color-assente-dark);
+}
+
+.entry-edit-btn {
+    background: none;
+    border: none;
+    padding: var(--spacing-xs);
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+}
+
+.entry-item:hover .entry-edit-btn {
+    opacity: 1;
+}
+
+/* ============================================
+   Week Summary
+   ============================================ */
+.week-summary {
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+}
+
+.summary-row:not(:last-child) {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.summary-label {
+    font-weight: 500;
+    color: var(--color-text-light);
+}
+
+.summary-value {
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    font-family: 'SF Mono', 'Consolas', monospace;
+}
+
+.summary-balance .summary-value {
+    font-size: var(--font-size-xl);
+}
+
+.balance-positive {
+    color: var(--color-success);
+}
+
+.balance-negative {
+    color: var(--color-danger);
+}
+
+.balance-neutral {
+    color: var(--color-text-light);
+}
+
+/* ============================================
+   Export Buttons Section
+   ============================================ */
+.export-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Backup Status
+   ============================================ */
+.backup-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.backup-status.status-warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--color-warning-dark);
+}
+
+.backup-status.status-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--color-danger);
+}
+
+/* ============================================
+   Modal
+   ============================================ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.modal.is-open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: modalSlideIn var(--transition-base) ease-out;
+}
+
+.modal-small {
+    max-width: 350px;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.modal-header h2 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: var(--font-size-2xl);
+    color: var(--color-text-light);
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    line-height: 1;
+    transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+    color: var(--color-danger);
+}
+
+.modal-body {
+    padding: var(--spacing-lg);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+}
+
+.modal-footer .btn-danger {
+    margin-right: auto;
+}
+
+/* ============================================
+   Forms
+   ============================================ */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-family: inherit;
+    font-size: 16px; /* Prevent iOS zoom */
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input:invalid {
+    border-color: var(--color-danger);
+}
+
+/* ============================================
+   Old Weeks List (Clean Data Modal)
+   ============================================ */
+.old-weeks-list {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-sm);
+    background-color: var(--color-bg);
+    border-radius: var(--radius-md);
+}
+
+.old-weeks-list li {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.warning-text {
+    color: var(--color-warning-dark);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+}
+
+/* ============================================
+   Toast Notification
+   ============================================ */
+.toast {
+    position: fixed;
+    bottom: calc(var(--spacing-xl) + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-text);
+    color: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    font-weight: 500;
+    z-index: 2000;
+    opacity: 0;
+    transition: transform var(--transition-base), opacity var(--transition-base);
+    max-width: calc(100% - var(--spacing-xl));
+    text-align: center;
+}
+
+.toast.is-visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast.toast-success {
+    background-color: var(--color-success);
+}
+
+.toast.toast-error {
+    background-color: var(--color-danger);
+}
+
+.toast.toast-warning {
+    background-color: var(--color-warning);
+}
+
+/* ============================================
+   Responsive - Desktop
+   ============================================ */
+@media (min-width: 600px) {
+    .app-container {
+        padding: var(--spacing-xl);
+    }
+    
+    .app-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .action-buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .week-days {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    .day-card.full-width {
+        grid-column: span 2;
+    }
+    
+    .export-buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .btn, .modal, .toast, .backup-status, .export-buttons {
+        display: none !important;
+    }
+    
+    .app-container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .day-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--color-border);
+    }
+}
+
+/* ============================================
+   Accessibility - Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   Dark Mode (Optional - Future)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment to enable dark mode
+    :root {
+        --color-bg: #1f2937;
+        --color-bg-card: #374151;
+        --color-bg-dark: #111827;
+        --color-text: #f9fafb;
+        --color-text-light: #d1d5db;
+        --color-text-muted: #9ca3af;
+        --color-border: #4b5563;
+    }
+    */
+}
+
+/* ============================================
+   PWA Install Banner
+   ============================================ */
+.install-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    padding: var(--spacing-md);
+    z-index: 1001;
+    box-shadow: var(--shadow-lg);
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.install-banner-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.install-banner-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.install-banner-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.install-banner-text strong {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+}
+
+.install-banner-text span {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+}
+
+.btn-install-banner {
+    background: white;
+    color: var(--color-primary);
+    font-weight: 600;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-install-banner:hover {
+    background: var(--color-bg);
+    transform: scale(1.05);
+}
+
+.btn-install-close {
+    background: transparent;
+    color: white;
+    font-size: 1.2rem;
+    padding: var(--spacing-xs);
+    min-width: auto;
+    min-height: auto;
+    opacity: 0.8;
+}
+
+.btn-install-close:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.1);
+}
+
+/* iOS Install Instructions */
+.ios-install-hint {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #333 0%, #111 100%);
+    color: white;
+    padding: var(--spacing-lg);
+    z-index: 1001;
+    text-align: center;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.ios-install-hint p {
+    margin-bottom: var(--spacing-sm);
+}
+
+.ios-install-hint .ios-icon {
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+
+.ios-install-hint .btn-close-ios {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    margin-top: var(--spacing-md);
+}
+
+/* Spazio per il banner quando visibile */
+body.has-install-banner .app-container {
+    margin-top: 80px;
+}
+
+@media (max-width: 480px) {
+    .install-banner-content {
+        flex-wrap: wrap;
+    }
+    
+    .install-banner-text {
+        flex: 1 1 calc(100% - 60px);
+    }
+    
+    .btn-install-banner {
+        flex: 1 1 100%;
+        margin-top: var(--spacing-xs);
+    }
+    
+    .btn-install-close {
+        position: absolute;
+        top: var(--spacing-sm);
+        right: var(--spacing-sm);
+    }
+    
+    .install-banner {
+        position: relative;
+    }
+}

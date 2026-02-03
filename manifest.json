@@ -1,0 +1,48 @@
+{
+    "name": "Orari Lavoro PA - Timbrature Dipendenti Pubblici",
+    "short_name": "Orari Lavoro",
+    "description": "App gratuita per dipendenti pubblici italiani. Traccia entrate/uscite, calcola automaticamente le 36 ore settimanali, supporta smart working. Funziona offline, dati solo sul tuo dispositivo. Nessun account richiesto.",
+    "start_url": "./",
+    "scope": "./",
+    "id": "orari-lavoro-pa",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#2563eb",
+    "background_color": "#f3f4f6",
+    "lang": "it",
+    "dir": "ltr",
+    "categories": ["productivity", "utilities", "business"],
+    "icons": [
+        {
+            "src": "icons/icon-192.svg",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-512.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Registra Entrata",
+            "short_name": "Entrata",
+            "description": "Registra l'orario di entrata",
+            "url": "./?action=entrata",
+            "icons": [{ "src": "icons/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+        },
+        {
+            "name": "Registra Uscita",
+            "short_name": "Uscita",
+            "description": "Registra l'orario di uscita",
+            "url": "./?action=uscita",
+            "icons": [{ "src": "icons/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml" }]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false
+}

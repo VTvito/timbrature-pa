@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3f4f6"/>
+      <stop offset="100%" style="stop-color:#e5e7eb"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2563eb"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  
+  <!-- Phone Frame -->
+  <rect x="200" y="50" width="400" height="500" rx="30" fill="#1f2937" filter="url(#shadow)"/>
+  <rect x="215" y="65" width="370" height="470" rx="20" fill="white"/>
+  
+  <!-- App Header -->
+  <rect x="215" y="65" width="370" height="60" rx="20" fill="url(#header)"/>
+  <text x="400" y="102" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">
+    🕐 Orari Lavoro
+  </text>
+  <rect x="490" y="82" width="80" height="30" rx="15" fill="#10b981"/>
+  <text x="530" y="103" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle">
+    📲 Installa
+  </text>
+  
+  <!-- Week Navigation -->
+  <rect x="235" y="145" width="330" height="50" rx="8" fill="#f3f4f6"/>
+  <text x="260" y="175" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">◀ Sett. Prec.</text>
+  <text x="400" y="168" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#1f2937" text-anchor="middle">
+    Settimana 6
+  </text>
+  <text x="400" y="185" font-family="Arial, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">
+    2026 • Corrente
+  </text>
+  <text x="520" y="175" font-family="Arial, sans-serif" font-size="14" fill="#6b7280" text-anchor="end">Sett. Succ. ▶</text>
+  
+  <!-- Day Cards -->
+  <g transform="translate(235, 215)">
+    <!-- Lunedì -->
+    <rect x="0" y="0" width="62" height="100" rx="8" fill="white" filter="url(#shadow)"/>
+    <rect x="0" y="0" width="62" height="25" rx="8" fill="#f3f4f6"/>
+    <text x="31" y="17" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#6b7280" text-anchor="middle">LUN 02/02</text>
+    <text x="31" y="50" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle" font-weight="600">🟢 08:00</text>
+    <text x="31" y="70" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" text-anchor="middle" font-weight="600">🔴 17:00</text>
+    <text x="31" y="90" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" text-anchor="middle">8h 30m</text>
+    
+    <!-- Martedì -->
+    <rect x="68" y="0" width="62" height="100" rx="8" fill="white" filter="url(#shadow)"/>
+    <rect x="68" y="0" width="62" height="25" rx="8" fill="#f3f4f6"/>
+    <text x="99" y="17" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#6b7280" text-anchor="middle">MAR 03/02</text>
+    <text x="99" y="50" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle" font-weight="600">🟢 08:30</text>
+    <text x="99" y="70" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" text-anchor="middle" font-weight="600">🔴 16:30</text>
+    <text x="99" y="90" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" text-anchor="middle">7h 30m</text>
+    
+    <!-- Mercoledì Smart -->
+    <rect x="136" y="0" width="62" height="100" rx="8" fill="white" filter="url(#shadow)"/>
+    <rect x="136" y="0" width="62" height="25" rx="8" fill="#8b5cf6"/>
+    <text x="167" y="17" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="white" text-anchor="middle">MER 04/02</text>
+    <text x="167" y="58" font-family="Arial, sans-serif" font-size="24" fill="#8b5cf6" text-anchor="middle">🏠</text>
+    <text x="167" y="90" font-family="Arial, sans-serif" font-size="10" fill="#8b5cf6" text-anchor="middle" font-weight="600">Smart 7h 30m</text>
+    
+    <!-- Giovedì -->
+    <rect x="204" y="0" width="62" height="100" rx="8" fill="white" filter="url(#shadow)"/>
+    <rect x="204" y="0" width="62" height="25" rx="8" fill="#f3f4f6"/>
+    <text x="235" y="17" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#6b7280" text-anchor="middle">GIO 05/02</text>
+    <text x="235" y="50" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle" font-weight="600">🟢 09:00</text>
+    <text x="235" y="70" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" text-anchor="middle" font-weight="600">🔴 18:00</text>
+    <text x="235" y="90" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" text-anchor="middle">8h 30m</text>
+    
+    <!-- Venerdì -->
+    <rect x="272" y="0" width="58" height="100" rx="8" fill="white" filter="url(#shadow)"/>
+    <rect x="272" y="0" width="58" height="25" rx="8" fill="#f3f4f6"/>
+    <text x="301" y="17" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#6b7280" text-anchor="middle">VEN 06/02</text>
+    <text x="301" y="50" font-family="Arial, sans-serif" font-size="11" fill="#10b981" text-anchor="middle" font-weight="600">🟢 08:00</text>
+    <text x="301" y="70" font-family="Arial, sans-serif" font-size="11" fill="#ef4444" text-anchor="middle" font-weight="600">🔴 14:00</text>
+    <text x="301" y="90" font-family="Arial, sans-serif" font-size="10" fill="#1f2937" text-anchor="middle">6h</text>
+  </g>
+  
+  <!-- Summary Card -->
+  <rect x="235" y="335" width="330" height="70" rx="8" fill="white" filter="url(#shadow)"/>
+  <text x="255" y="360" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">Totale Settimana:</text>
+  <text x="255" y="385" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1f2937">38h 00m</text>
+  <text x="420" y="360" font-family="Arial, sans-serif" font-size="14" fill="#6b7280">Saldo:</text>
+  <text x="420" y="385" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#10b981">+2h 00m</text>
+  <text x="545" y="385" font-family="Arial, sans-serif" font-size="20" fill="#10b981">✅</text>
+  
+  <!-- Action Buttons -->
+  <rect x="235" y="425" width="153" height="45" rx="8" fill="#10b981"/>
+  <text x="311" y="453" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">
+    🟢 Entrata
+  </text>
+  
+  <rect x="396" y="425" width="153" height="45" rx="8" fill="#ef4444"/>
+  <text x="472" y="453" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">
+    🔴 Uscita
+  </text>
+  
+  <!-- Bottom Info -->
+  <rect x="235" y="485" width="153" height="35" rx="8" fill="#8b5cf6"/>
+  <text x="311" y="508" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">
+    🏠 Smart
+  </text>
+  
+  <rect x="396" y="485" width="153" height="35" rx="8" fill="#f59e0b"/>
+  <text x="472" y="508" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="white" text-anchor="middle">
+    📤 Export
+  </text>
+  
+  <!-- PWA Badge -->
+  <rect x="310" y="545" width="180" height="25" rx="12" fill="#2563eb" opacity="0.1"/>
+  <text x="400" y="562" font-family="Arial, sans-serif" font-size="11" fill="#2563eb" text-anchor="middle" font-weight="600">
+    📱 PWA • Funziona Offline
+  </text>
+</svg>

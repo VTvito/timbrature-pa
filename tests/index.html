@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Suite - Orari Lavoro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            background: #4a4a8a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: #5a5aa0;
+            transform: translateY(-2px);
+        }
+        
+        button.primary {
+            background: #22c55e;
+            font-weight: 600;
+        }
+        
+        button.primary:hover {
+            background: #16a34a;
+        }
+        
+        .results-panel {
+            background: #252542;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .summary {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 15px 25px;
+            background: #333355;
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+        
+        .stat.passed .stat-value { color: #22c55e; }
+        .stat.failed .stat-value { color: #ef4444; }
+        .stat.total .stat-value { color: #8b5cf6; }
+        
+        .console-output {
+            background: #111122;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .log-line {
+            padding: 4px 0;
+            border-bottom: 1px solid #222244;
+        }
+        
+        .log-line.pass { color: #22c55e; }
+        .log-line.fail { color: #ef4444; }
+        .log-line.info { color: #60a5fa; }
+        .log-line.section { 
+            color: #fbbf24; 
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #333355;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .module-tests {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .module-btn {
+            background: #333355;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .module-btn:hover {
+            background: #444470;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 600px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 Test Suite</h1>
+            <p class="subtitle">Orari Lavoro - Developer Tools</p>
+        </header>
+        
+        <div class="controls">
+            <button class="primary" onclick="runAllTests()">▶ Esegui Tutti i Test</button>
+            <button onclick="clearOutput()">🗑 Pulisci Output</button>
+            <button onclick="window.open('../index.html')">📱 Apri App</button>
+        </div>
+        
+        <div class="results-panel">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="summary">
+                <div class="stat passed">
+                    <div class="stat-value" id="passedCount">0</div>
+                    <div class="stat-label">Passati</div>
+                </div>
+                <div class="stat failed">
+                    <div class="stat-value" id="failedCount">0</div>
+                    <div class="stat-label">Falliti</div>
+                </div>
+                <div class="stat total">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">Totale</div>
+                </div>
+            </div>
+            
+            <div class="console-output" id="consoleOutput">
+                <div class="log-line info">Pronto per eseguire i test...</div>
+                <div class="log-line info">Clicca "Esegui Tutti i Test" per iniziare.</div>
+            </div>
+        </div>
+        
+        <div class="module-tests">
+            <button class="module-btn" onclick="runSingleTest('DateUtils')">📅 DateUtils</button>
+            <button class="module-btn" onclick="runSingleTest('Validators')">✅ Validators</button>
+            <button class="module-btn" onclick="runSingleTest('TimeCalculator')">⏱️ TimeCalculator</button>
+            <button class="module-btn" onclick="runSingleTest('TimeEntry')">📝 TimeEntry</button>
+            <button class="module-btn" onclick="runSingleTest('WeekData')">📆 WeekData</button>
+            <button class="module-btn" onclick="runSingleTest('Storage')">💾 Storage</button>
+        </div>
+        
+        <footer>
+            <p>Test Suite per sviluppatori - Non inclusa nell'app di produzione</p>
+        </footer>
+    </div>
+
+    <!-- Import Moduli App -->
+    <script type="module">
+        import * as DateUtils from '../js/utils/DateUtils.js';
+        import * as Validators from '../js/utils/Validators.js';
+        import { timeCalculator, CONFIG } from '../js/services/TimeCalculator.js';
+        import { TimeEntry } from '../js/models/TimeEntry.js';
+        import { WeekData } from '../js/models/WeekData.js';
+
+        // Esponi globalmente per i test
+        window.__dateUtils = DateUtils;
+        window.__validators = Validators;
+        window.__timeCalculator = { timeCalculator, CONFIG };
+        window.__timeEntry = { TimeEntry };
+        window.__weekData = { WeekData };
+        
+        window.modulesLoaded = true;
+        log('✅ Moduli app caricati correttamente', 'pass');
+    </script>
+
+    <!-- Test Suite -->
+    <script src="test-suite.js"></script>
+
+    <script>
+        const outputEl = document.getElementById('consoleOutput');
+        const passedEl = document.getElementById('passedCount');
+        const failedEl = document.getElementById('failedCount');
+        const totalEl = document.getElementById('totalCount');
+        const progressEl = document.getElementById('progressFill');
+
+        // Override console per catturare output
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        function log(msg, type = 'info') {
+            const line = document.createElement('div');
+            line.className = `log-line ${type}`;
+            line.textContent = msg;
+            outputEl.appendChild(line);
+            outputEl.scrollTop = outputEl.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+            
+            let type = 'info';
+            if (msg.includes('✅')) type = 'pass';
+            if (msg.includes('❌')) type = 'fail';
+            if (msg.includes('Testing') || msg.includes('===')) type = 'section';
+            
+            log(msg, type);
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' ');
+            log(msg, 'fail');
+        };
+
+        function updateStats(passed, failed) {
+            const total = passed + failed;
+            passedEl.textContent = passed;
+            failedEl.textContent = failed;
+            totalEl.textContent = total;
+            progressEl.style.width = total > 0 ? `${(passed / total) * 100}%` : '0%';
+        }
+
+        async function runAllTests() {
+            clearOutput();
+            log('🚀 Avvio test suite...', 'info');
+            
+            // Attendi caricamento moduli
+            if (!window.modulesLoaded) {
+                log('⏳ Attendo caricamento moduli...', 'info');
+                await new Promise(r => setTimeout(r, 500));
+            }
+            
+            try {
+                const results = await AllTests.runAll();
+                updateStats(results.passed, results.failed);
+            } catch (error) {
+                log(`❌ Errore: ${error.message}`, 'fail');
+            }
+        }
+
+        async function runSingleTest(module) {
+            clearOutput();
+            log(`🧪 Esecuzione test: ${module}`, 'info');
+            
+            try {
+                let results;
+                switch (module) {
+                    case 'DateUtils': results = await AllTests.runDateUtils(); break;
+                    case 'Validators': results = await AllTests.runValidators(); break;
+                    case 'TimeCalculator': results = await AllTests.runTimeCalculator(); break;
+                    case 'TimeEntry': results = await AllTests.runTimeEntry(); break;
+                    case 'WeekData': results = await AllTests.runWeekData(); break;
+                    case 'Storage': results = await AllTests.runStorage(); break;
+                }
+                updateStats(results.passed, results.failed);
+            } catch (error) {
+                log(`❌ Errore: ${error.message}`, 'fail');
+            }
+        }
+
+        function clearOutput() {
+            outputEl.innerHTML = '';
+            updateStats(0, 0);
+        }
+
+        // Esponi funzioni globalmente
+        window.runAllTests = runAllTests;
+        window.runSingleTest = runSingleTest;
+        window.clearOutput = clearOutput;
+        window.log = log;
+    </script>
+</body>
+</html>
