@@ -14,12 +14,13 @@ import { isFriday, parseDateISO } from '../utils/DateUtils.js';
 export const CONFIG = {
     WEEKLY_TARGET_HOURS: 36,           // Ore settimanali target
     WEEKLY_TARGET_MINUTES: 36 * 60,    // In minuti
-    PAUSE_MINUTES: 30,                 // Pausa automatica (30 min)
+    PAUSE_MINUTES: 30,                 // Pausa automatica (30 min) lun-gio
     PAUSE_THRESHOLD_HOURS: 6,          // Soglia per applicare pausa
     SMART_HOURS_DEFAULT: 7.5,          // Ore Smart lun-gio
     SMART_HOURS_FRIDAY: 6,             // Ore Smart venerdì
-    DAILY_TARGET_HOURS: 7.2,           // Ore giornaliere target (36/5)
-    FRIDAY_TARGET_HOURS: 6             // Ore target venerdì
+    DAILY_TARGET_HOURS: 7.5,           // Ore giornaliere target lun-gio (7h30m)
+    FRIDAY_TARGET_HOURS: 6             // Ore target venerdì (6h, no pausa)
+    // Verifica: 7.5 * 4 + 6 = 36h ✓
 };
 
 /**
