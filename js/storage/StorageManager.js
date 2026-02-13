@@ -9,8 +9,6 @@ import { LocalStorageAdapter } from './LocalStorageAdapter.js';
 import { IndexedDBAdapter } from './IndexedDBAdapter.js';
 import { eventBus, EVENTS } from '../utils/EventBus.js';
 
-const BACKUP_INTERVAL_SAVES = 5;  // Backup ogni N salvataggi
-const BACKUP_INTERVAL_HOURS = 72; // Ore massime tra backup (3 giorni)
 const OLD_DATA_CHECK_DAYS = 30;   // Controllo dati vecchi ogni N giorni
 const OLD_DATA_THRESHOLD_MONTHS = 3; // Soglia per dati "vecchi"
 
@@ -20,7 +18,6 @@ export class StorageManager {
         this.indexedDB = new IndexedDBAdapter();
         this.isInitialized = false;
         this.useIndexedDB = false;
-        this._backupReminderShownThisSession = false;
     }
 
     /**
@@ -84,9 +81,6 @@ export class StorageManager {
 
             // Emetti evento
             eventBus.emit(EVENTS.DATA_SAVED, { timestamp: Date.now() });
-
-            // Verifica se è necessario un backup
-            await this.checkBackupNeeded();
 
             return true;
         } catch (e) {
@@ -187,82 +181,6 @@ export class StorageManager {
     async getWeekKeys() {
         const allData = await this.loadAllData();
         return Object.keys(allData).sort();
-    }
-
-    /**
-     * Verifica se è necessario un backup
-     * @returns {Promise<void>}
-     */
-    async checkBackupNeeded() {
-        if (!this.useIndexedDB) return;
-
-        const saveCount = await this.localStorage.getSaveCount();
-        const lastBackupTime = await this.localStorage.getLastBackupTime();
-        const now = Date.now();
-
-        // Backup ogni N salvataggi
-        if (saveCount > 0 && saveCount % BACKUP_INTERVAL_SAVES === 0) {
-            await this.createBackup();
-            return;
-        }
-
-        // Backup se sono passate più di 72 ore (solo una volta per sessione)
-        if (lastBackupTime && !this._backupReminderShownThisSession) {
-            const hoursSinceBackup = (now - lastBackupTime) / (1000 * 60 * 60);
-            if (hoursSinceBackup >= BACKUP_INTERVAL_HOURS) {
-                this._backupReminderShownThisSession = true;
-                eventBus.emit(EVENTS.BACKUP_NEEDED, { 
-                    hoursSinceBackup: Math.round(hoursSinceBackup) 
-                });
-            }
-        }
-    }
-
-    /**
-     * Crea un backup completo
-     * @returns {Promise<boolean>}
-     */
-    async createBackup() {
-        if (!this.useIndexedDB) {
-            console.warn('Backup non disponibile: IndexedDB non attivo');
-            return false;
-        }
-
-        try {
-            const data = await this.loadAllData();
-            await this.indexedDB.createBackup(data);
-            await this.localStorage.setLastBackupTime(Date.now());
-            await this.localStorage.resetSaveCount();
-
-            eventBus.emit(EVENTS.BACKUP_CREATED, { timestamp: Date.now() });
-            console.log('Backup creato con successo');
-            return true;
-        } catch (e) {
-            console.error('Errore creazione backup:', e);
-            return false;
-        }
-    }
-
-    /**
-     * Ottiene informazioni sull'ultimo backup
-     * @returns {Promise<Object|null>}
-     */
-    async getLastBackupInfo() {
-        const lastBackupTime = await this.localStorage.getLastBackupTime();
-        
-        if (!lastBackupTime) {
-            return null;
-        }
-
-        const now = Date.now();
-        const hoursSince = (now - lastBackupTime) / (1000 * 60 * 60);
-
-        return {
-            timestamp: lastBackupTime,
-            date: new Date(lastBackupTime),
-            hoursSince: Math.round(hoursSince),
-            isRecent: hoursSince < BACKUP_INTERVAL_HOURS
-        };
     }
 
     /**

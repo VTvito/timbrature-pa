@@ -76,12 +76,6 @@ export class AppController {
             // Carica e visualizza settimana corrente
             await this.loadCurrentWeek();
 
-            // Aggiorna stato backup
-            await this.updateBackupStatus();
-
-            // Controlla se necessario reminder backup
-            await this.checkBackupReminder();
-
             // Controlla dati vecchi
             await this.checkOldData();
             
@@ -122,14 +116,6 @@ export class AppController {
      * Setup event listeners globali
      */
     setupEventListeners() {
-        // Backup needed
-        eventBus.on(EVENTS.BACKUP_NEEDED, async (data) => {
-            const result = await modalManager.openBackupReminderModal(data.hoursSinceBackup);
-            if (result?.action === 'backup') {
-                await this.handleBackup();
-            }
-        });
-
         // Week changed
         eventBus.on(EVENTS.WEEK_CHANGED, async (data) => {
             await this.loadWeekData(data.weekKey);
@@ -594,7 +580,7 @@ export class AppController {
     }
 
     /**
-     * Gestisce backup manuale - esporta file JSON come backup reale
+     * Gestisce backup manuale - esporta file JSON (backup reale e portabile)
      */
     async handleBackup() {
         try {
@@ -611,47 +597,10 @@ export class AppController {
             const filename = `backup-orari-lavoro-${timestamp}.json`;
             exportService.exportJSON(data, filename);
             
-            // Aggiorna anche backup interno
-            await this.storage.createBackup();
-            await this.updateBackupStatus();
-            
             this.ui.showToast('📥 Backup scaricato! Conserva il file in un posto sicuro.', 'success');
         } catch (error) {
             console.error('Errore backup:', error);
             this.ui.showToast('Errore durante il backup', 'error');
-        }
-    }
-
-    /**
-     * Aggiorna stato backup nella UI
-     */
-    async updateBackupStatus() {
-        const backupInfo = await this.storage.getLastBackupInfo();
-        this.ui.updateBackupStatus(backupInfo);
-    }
-
-    /**
-     * Controlla se mostrare reminder backup
-     */
-    async checkBackupReminder() {
-        const backupInfo = await this.storage.getLastBackupInfo();
-        
-        // Se non c'è mai stato un backup, non mostrare subito il reminder
-        // L'utente potrebbe essere alla prima apertura
-        if (!backupInfo) {
-            // Prima apertura - non disturbare l'utente
-            // Il reminder apparirà dopo aver inserito dati
-            return;
-        }
-        
-        // Se è passato troppo tempo dall'ultimo backup
-        if (!backupInfo.isRecent) {
-            const hours = backupInfo.hoursSince;
-            
-            // Mostra reminder solo se sono passate almeno 72h (3 giorni)
-            if (hours >= 72) {
-                eventBus.emit(EVENTS.BACKUP_NEEDED, { hoursSinceBackup: hours });
-            }
         }
     }
 
@@ -665,9 +614,6 @@ export class AppController {
             const result = await modalManager.openCleanDataModal(oldWeeks);
             
             if (result?.action === 'clean') {
-                // Prima fai backup
-                await this.storage.createBackup();
-                
                 // Poi pulisci
                 const deleted = await this.storage.cleanOldData(oldWeeks);
                 

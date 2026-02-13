@@ -2,7 +2,7 @@
  * ModalManager - Gestione modali dell'applicazione
  * 
  * @description Gestisce apertura, chiusura e interazione con le modali:
- * edit entry, conferme, backup reminder, pulizia dati.
+ * edit entry, conferme e pulizia dati.
  */
 
 import { eventBus, EVENTS } from '../utils/EventBus.js';
@@ -33,7 +33,6 @@ export class ModalManager {
         this.registerModal('edit', document.getElementById('editModal'));
         this.registerModal('addEntry', document.getElementById('addEntryModal'));
         this.registerModal('confirm', document.getElementById('confirmModal'));
-        this.registerModal('backupReminder', document.getElementById('backupReminderModal'));
         this.registerModal('cleanData', document.getElementById('cleanDataModal'));
         
         // Setup event listeners globali
@@ -94,7 +93,6 @@ export class ModalManager {
         switch (action) {
             case 'close':
             case 'cancel':
-            case 'later':
                 this.close(null);
                 break;
             case 'save':
@@ -108,9 +106,6 @@ export class ModalManager {
                 break;
             case 'confirm':
                 this.close({ confirmed: true });
-                break;
-            case 'backup':
-                this.close({ action: 'backup' });
                 break;
             case 'clean':
                 this.close({ action: 'clean' });
@@ -458,30 +453,6 @@ export class ModalManager {
 
             modal.querySelector('#confirmModalTitle').textContent = title;
             modal.querySelector('#confirmMessage').textContent = message;
-        });
-    }
-
-    /**
-     * Apre la modale reminder backup
-     * @param {number} hoursSinceBackup - Ore dall'ultimo backup
-     * @returns {Promise<{action: string}|null>}
-     */
-    openBackupReminderModal(hoursSinceBackup) {
-        return new Promise((resolve) => {
-            this.currentResolver = resolve;
-            
-            const modal = this.open('backupReminder');
-            if (!modal) {
-                resolve(null);
-                return;
-            }
-
-            const message = modal.querySelector('#backupReminderMessage');
-            if (hoursSinceBackup > 48) {
-                message.textContent = `Sono passati ${Math.round(hoursSinceBackup)} ore dall'ultimo backup. È consigliato effettuare un backup ora.`;
-            } else {
-                message.textContent = `Sono passate più di 24 ore dall'ultimo backup. Vuoi effettuare un backup ora?`;
-            }
         });
     }
 

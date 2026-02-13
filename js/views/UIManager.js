@@ -41,8 +41,6 @@ export class UIManager {
             weekDays: document.getElementById('weekDays'),
             totalHours: document.getElementById('totalHours'),
             balanceHours: document.getElementById('balanceHours'),
-            backupStatus: document.getElementById('backupStatus'),
-            backupText: document.getElementById('backupText'),
             toast: document.getElementById('toast'),
             
             // Buttons
@@ -602,40 +600,6 @@ export class UIManager {
             this.elements.balanceHours.classList.add('balance-negative');
         } else {
             this.elements.balanceHours.classList.add('balance-neutral');
-        }
-    }
-
-    /**
-     * Aggiorna lo stato del backup
-     * @param {Object|null} backupInfo - Info backup
-     */
-    updateBackupStatus(backupInfo) {
-        const { backupStatus, backupText } = this.elements;
-
-        if (!backupInfo) {
-            // Prima apertura - messaggio neutro
-            backupStatus.className = 'backup-status';
-            backupText.textContent = 'Backup: non ancora effettuato';
-            return;
-        }
-
-        const { hoursSince } = backupInfo;
-
-        // Sempre stile neutro - niente warning aggressivi
-        backupStatus.className = 'backup-status';
-
-        if (hoursSince < 1) {
-            backupText.textContent = 'Ultimo backup: meno di 1 ora fa';
-        } else if (hoursSince < 24) {
-            backupText.textContent = `Ultimo backup: ${hoursSince}h fa`;
-        } else {
-            const days = Math.round(hoursSince / 24);
-            if (days <= 7) {
-                backupText.textContent = `Ultimo backup: ${days} ${days === 1 ? 'giorno' : 'giorni'} fa`;
-            } else {
-                // Messaggio gentile dopo 7+ giorni, senza icona allarmante
-                backupText.textContent = `Ultimo backup: ${days} giorni fa · Consigliato backup`;
-            }
         }
     }
 
