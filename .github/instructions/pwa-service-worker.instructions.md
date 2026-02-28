@@ -38,6 +38,7 @@ Se aggiungi un nuovo file che deve funzionare offline, aggiungi il path a `CACHE
 - `<meta name="apple-mobile-web-app-title" content="Timbra PA">`
 - `<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">`
 - iOS NON supporta `beforeinstallprompt` → mostrare istruzioni manuali
+- L'installazione funziona da Safari e Chrome (entrambi usano WebKit su iOS)
 - iOS cacha icona/nome al primo install → cambio richiede reinstallazione
 
 ## Dati Utente & Aggiornamenti

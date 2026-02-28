@@ -31,26 +31,51 @@
     
     <!-- iOS Install Instructions (shown on Safari) -->
     <div id="iosInstallModal" class="modal" role="dialog" aria-modal="true">
-        <div class="modal-content modal-small">
+        <div class="modal-content ios-install-modal">
             <div class="modal-header">
                 <h2>📲 Installa su iPhone</h2>
                 <button class="modal-close" id="iosModalClose" aria-label="Chiudi">&times;</button>
             </div>
             <div class="modal-body ios-instructions">
-                <div class="ios-step">
-                    <span class="ios-step-number">1</span>
-                    <span>Apri in <strong>Safari</strong> e tocca <strong>Condividi</strong></span>
-                    <span class="ios-icon-large">⬆️</span>
+                <p class="ios-intro">Bastano 3 tocchi! Funziona da Safari o Chrome.</p>
+                <div class="ios-step ios-step-animated" style="animation-delay: 0.1s">
+                    <div class="ios-step-icon">
+                        <span class="ios-step-emoji">⬆️</span>
+                    </div>
+                    <div class="ios-step-content">
+                        <span class="ios-step-number">1</span>
+                        <div class="ios-step-text">
+                            <strong>Tocca "Condividi"</strong>
+                            <span>Safari: icona ⬆️ in basso. Chrome: menu ⋯ poi "Condividi"</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="ios-step">
-                    <span class="ios-step-number">2</span>
-                    <span>Scorri e scegli <strong>"Aggiungi a Home"</strong></span>
-                    <span class="ios-icon-large">➕</span>
+                <div class="ios-step ios-step-animated" style="animation-delay: 0.25s">
+                    <div class="ios-step-icon">
+                        <span class="ios-step-emoji">➕</span>
+                    </div>
+                    <div class="ios-step-content">
+                        <span class="ios-step-number">2</span>
+                        <div class="ios-step-text">
+                            <strong>Scegli "Aggiungi a Home"</strong>
+                            <span>Scorri la lista verso il basso fino a trovarlo</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="ios-step">
-                    <span class="ios-step-number">3</span>
-                    <span>Conferma con <strong>"Aggiungi"</strong> in alto a destra</span>
-                    <span class="ios-icon-large">✅</span>
+                <div class="ios-step ios-step-animated" style="animation-delay: 0.4s">
+                    <div class="ios-step-icon">
+                        <span class="ios-step-emoji">✅</span>
+                    </div>
+                    <div class="ios-step-content">
+                        <span class="ios-step-number">3</span>
+                        <div class="ios-step-text">
+                            <strong>Tocca "Aggiungi"</strong>
+                            <span>In alto a destra. L'app apparirà nella Home!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ios-note">
+                    <span>💡</span> Funziona con <strong>Safari</strong> e <strong>Chrome</strong>. Su Safari il pulsante Condividi è ⬆️ in basso; su Chrome tocca <strong>⋯</strong> e poi "Condividi".
                 </div>
             </div>
             <div class="modal-footer">
@@ -143,7 +168,7 @@
             <a href="#" id="showInstallHelp" class="install-help-link">
                 📲 Installa l'app sul tuo dispositivo
             </a>
-            <span class="app-version" id="appVersion">v2.2 • Dati salvati solo sul tuo dispositivo 🔒</span>
+            <span class="app-version" id="appVersion">v2.3.1 • Dati salvati solo sul tuo dispositivo 🔒</span>
         </footer>
     </div>
 

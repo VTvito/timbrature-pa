@@ -212,7 +212,7 @@ export class UIManager {
             if (installBanner && (forceShow || !wasDismissedRecently()) && !isStandalone()) {
                 // Adatta il messaggio al dispositivo
                 if (isIOS()) {
-                    installBannerHint.textContent = 'Su iPhone: Safari → Condividi → Aggiungi a Home';
+                    installBannerHint.textContent = 'Su iPhone: Condividi → Aggiungi a Home';
                     installBannerBtn.textContent = 'Guida iPhone';
                     installBannerBtn.style.display = 'block';
                 } else if (!deferredPrompt) {

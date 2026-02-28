@@ -42,10 +42,10 @@ Lo storage passa SEMPRE da `StorageManager`. Mai chiamare `localStorage` o `inde
 `TimeCalculator.calculateDayHours(entries, dateKey)` è il cuore del calcolo:
 1. Entry speciali (smart/assente): converte `hours` in minuti
 2. Entry normali: calcola coppie entrata/uscita, somma i minuti
-3. Pausa (solo Lun–Gio):
+3. Pausa (tutti i giorni, incluso venerdì, se ore lorde > 6h):
    - 1 coppia + ore > 6h → deduce 30min automatici
    - 2+ coppie → calcola break reale → se < 30min, deduce la differenza
-4. Venerdì: pausa se ore lorde > 6h (come tutti gli altri giorni)
+4. `isFriday()` determina solo il target giornaliero (6h vs 7h30), NON esclude la pausa
 
 ## Validazione Pre-Commit
 
